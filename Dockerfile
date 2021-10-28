@@ -1,8 +1,8 @@
 # Pull base image
 ARG rversion=4.1.0
 # Note to self: tidyverse includes devtools
-FROM rocker/tidyverse:${rversion} as base
-LABEL image=base
+FROM rocker/tidyverse:${rversion} as shinybase
+LABEL image=shinybase
 
 # Install debian package dependencies
 RUN apt-get update -qq && apt-get -y --no-install-recommends install \
@@ -26,33 +26,22 @@ RUN Rscript -e "install.packages('remotes')" \
   && Rscript -e "remotes::install_version('R.utils', '2.10.1')" \
   && Rscript -e "remotes::install_version('usethis', '2.0.1')" \
   && Rscript -e "remotes::install_version('testthat', '3.0.2')" \
-  && Rscript -e "devtools::install_github('dselivanov/RestRserve@v0.4.1')"
+  && Rscript -e "remotes::install_version('shiny', '1.6.0')" 
 
 # Copy the directory into the base image
 WORKDIR /
-COPY . ExampleRAPI
+COPY . app
 WORKDIR /ExampleRAPI
 
-# Test the R package
-FROM base as test
-LABEL image=test
-RUN mkdir scripts/results && (Rscript inst/server.R &) && sleep 2 && Rscript scripts/run_tests_docker.R
-
-# Install the R package
-FROM base as prerelease
-label image=prerelease
-RUN mkdir man \
-  && Rscript -e 'devtools::document(roclets = c("rd", "collate", "namespace"))' \
-  && R CMD build . \
-  && R CMD check ExampleRAPI_*.tar.gz --no-tests --no-manual \
-  && rm -rf man \
-  && R CMD INSTALL ExampleRAPI_*.tar.gz
+# TODO: Figure out how to test shiny apps...
+# Test the shiny app
+# FROM shinybase as test
+# LABEL image=test
+# RUN mkdir scripts/results && (Rscript inst/server.R &) && sleep 2 && Rscript scripts/run_tests_docker.R
 
 # Create the release image
-FROM prerelease as release
+FROM shinybase as release
 LABEL image=release
-WORKDIR /ExampleRAPI/inst
-EXPOSE 8080
-RUN ln -s /tmp/swagger-ui.html swagger-ui.html \
-  && rm -rf ./ExampleRAPI.Rcheck
-ENTRYPOINT [ "Rscript", "server.R" ]
+WORKDIR /app/
+EXPOSE 8888
+CMD [ "Rscript", "shiny::runApp(appDir = '.', host = '0.0.0.0', port = 8888, launch.browser = FALSE')" ]
