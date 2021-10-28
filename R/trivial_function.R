@@ -6,6 +6,6 @@
 #' @param n An integer
 #' 
 #' @return The input integer
-trivial_function(n) {
+trivial_function <- function(n) {
   return(n)
 }

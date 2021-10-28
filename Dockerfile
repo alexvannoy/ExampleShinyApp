@@ -13,7 +13,9 @@ RUN apt-get update -qq && apt-get -y --no-install-recommends install \
     libpq-dev \
     libssh2-1-dev \
     libcurl4-openssl-dev \
-    libssl-dev
+    libssl-dev \
+    libpng-dev \
+    libxt6
 
 # Update system libraries
 RUN apt-get update && \
@@ -31,7 +33,7 @@ RUN Rscript -e "install.packages('remotes')" \
 # Copy the directory into the base image
 WORKDIR /
 COPY . app
-WORKDIR /ExampleRAPI
+WORKDIR /app
 
 # TODO: Figure out how to test shiny apps...
 # Test the shiny app
@@ -44,4 +46,4 @@ FROM shinybase as release
 LABEL image=release
 WORKDIR /app/
 EXPOSE 8888
-CMD [ "Rscript", "shiny::runApp(appDir = '.', host = '0.0.0.0', port = 8888, launch.browser = FALSE')" ]
+CMD [ "R", "-e", "shiny::runApp(appDir = '.', host = '0.0.0.0', port = 8888, launch.browser = FALSE)" ]

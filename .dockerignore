@@ -10,9 +10,6 @@ man
 #Ignore .git things
 .git
 
-#Ignore the README
-**/README.md
-
 #Ignore the .html files
 *.html
 

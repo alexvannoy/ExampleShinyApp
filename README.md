@@ -14,6 +14,5 @@ Running `test web-app` will build the image `run-r-webapp` that runs the web app
 # Use Cases
 - Fork this repo
 - Add whatever functions and stuff you need in `/R/`
-- Add any endpoint handlers to `/R/run_app`
 - Change the name of the package if you want, but that changes in a lot of places, so good luck.
 

@@ -23,6 +23,6 @@ if "%1" == "web-app" (
   docker image prune
   ECHO ON
   docker build --build-arg rversion=4.1.0 . -t docker.io/library/r-shinyapp:dev
-  docker run -p 8080:8080 -it --name run-r-shinyapp docker.io/library/r-shinyapp:dev
+  docker run -p 8888:8888 -it --name run-r-shinyapp docker.io/library/r-shinyapp:dev
   EXIT /B 0
 )
