@@ -1,0 +1,20 @@
+#Ignore R stuff
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+man
+*.tar.gz
+**/*.Rcheck
+
+#Ignore .git things
+.git
+
+#Ignore the README
+**/README.md
+
+#Ignore the .html files
+*.html
+
+#Ignore IntelliJ files
+.idea
