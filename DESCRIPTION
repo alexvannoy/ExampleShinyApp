@@ -19,3 +19,5 @@ Imports:
 Suggests:
   devtools (>= 2.4.1),
   testthat (>= 3.0.2),
+  shinytest (>= 1.5.1),
+  
