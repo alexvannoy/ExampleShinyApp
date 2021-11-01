@@ -65,30 +65,35 @@ jobs:
           Rscript -e "options(download.file.method = 'libcurl'); remotes::install_git('https://github.com/r-hub/sysreqs')"
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           sudo -s eval "$sysreqs"
+      
       - name: Install dependencies
         run: |
           remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
 
+      - name: Install PhantomJS
+        shell: Rscript {0}
+        run: |
+          options(install.packages.check.source = "no")
+          if (!shinytest::dependenciesInstalled()) shinytest::installDependencies()
+
       - name: Find PhantomJS path
         id: phantomjs
         run: |
           echo "::set-output name=path::$(Rscript -e 'cat(shinytest:::phantom_paths()[[1]])')"
+      
       - name: Cache PhantomJS
         uses: actions/cache@v1
         with:
           path: ${{ steps.phantomjs.outputs.path }}
           key: ${{ runner.os }}-phantomjs
           restore-keys: ${{ runner.os }}-phantomjs
-      - name: Install PhantomJS
-        shell: Rscript {0}
-        run: |
-          options(install.packages.check.source = "no")
-          if (!shinytest::dependenciesInstalled()) shinytest::installDependencies()
+      
       - name: Run tests
         shell: Rscript {0}
         run: |
           shiny::runTests(".", assert = TRUE)
+      
       - name: Upload test results
         if: failure()
         uses: actions/upload-artifact@master
