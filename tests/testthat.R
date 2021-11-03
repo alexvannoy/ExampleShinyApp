@@ -1,4 +1,6 @@
 library(testthat)
-library(ExampleRAPI)
-
-test_check("ExampleRAPI")
+test_dir(
+  "./testthat",
+  env = shiny::loadSupport(),
+  reporter = c("progress", "fail")
+)

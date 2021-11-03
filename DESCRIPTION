@@ -1,27 +1,24 @@
-Package: ExampleRAPI
-Title: A small example R web application
-Version: 0.0.1
+Title: Rshiny Docker Deployment Template
 Authors@R: 
     person(given = "Alex",
            family = "Vannoy",
            role = c("aut", "cre"),
            email = "vannoy.alex.a@gmail.com")
 Description: This package demonstrates that I can create and deploy web applications that run off the R engine.
+Version: 0.0.1
+Type: Shiny
+DisplayMode: Showcase
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
-Remotes:
-  dselivanov/RestRserve@v0.4.1
 Imports: 
-  RestRserve (>= 0.4.1),
   jsonlite (>= 1.7.2),
   usethis (>= 2.0.1),
+  R.utils (>= 2.11.0),
 Suggests:
   devtools (>= 2.4.1),
   testthat (>= 3.0.2),
-Collate: 
-    'deep_ping.R'
-    'shallow_ping.R'
-    'run_app.R'
+  shinytest (>= 1.5.1),
+  
