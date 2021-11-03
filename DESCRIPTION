@@ -5,7 +5,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "vannoy.alex.a@gmail.com")
 Description: This package demonstrates that I can create and deploy web applications that run off the R engine.
-Version: 0.0.1
+Version: 0.0.2
 Type: Shiny
 DisplayMode: Showcase
 License: GPL (>= 2)
