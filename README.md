@@ -1,5 +1,5 @@
-# ExampleRAPI
-This is primarily an R repo that holds a tiny R web-app to be used in my Kubernetes learning experience. However, it should also function as a passable template for other R web services.
+# ExampleShinyApp
+This is primarily an R repo that holds a tiny R shiny app to be used in my Kubernetes learning experience. However, it should also function as a passable template for other R shiny apps.
 
 # test.bat
 ## build
