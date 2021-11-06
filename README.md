@@ -1,15 +1,15 @@
 # ExampleRAPI
 This is primarily an R repo that holds a tiny R web-app to be used in my Kubernetes learning experience. However, it should also function as a passable template for other R web services.
 
-#test.bat
+# test.bat
 ## build
-Running `test build` will build the image `r-webapp:dev` that houses the web-app.
+Running `test build` will build the image `r-shinyapp:dev` that houses the web-app.
 
 ## run-bash
-Running `test run-bash` will build the image `r-webapp:dev` with a bash entrypoint to help debug internal issues
+Running `test run-bash` will build the image `r-shinyapp:dev` with a bash entrypoint to help debug internal issues
 
-## test web-app
-Running `test web-app` will build the image `run-r-webapp` that runs the web app on `localhost:8080`. The actual route is set to `localhost:8080/api` but that's set in the run_app.R function when the `add_swagger_ui()` path is assigned.
+## web-app
+Running `test web-app` will build the image `run-r-shinyapp` that runs the web app on `localhost:8888`. 
 
 # Use Cases
 - Fork this repo
