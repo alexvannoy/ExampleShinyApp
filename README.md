@@ -3,7 +3,7 @@ This is primarily an R repo that holds a tiny R shiny app to be used in my Kuber
 
 # test.bat
 ## build
-Running `test build` will build the image `r-shinyapp:dev` that houses the web-app.
+Running `test build` will build the image `r-shinyapp:dev` that houses the shiny app.
 
 ## run-bash
 Running `test run-bash` will build the image `r-shinyapp:dev` with a bash entrypoint to help debug internal issues
